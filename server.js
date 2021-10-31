@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const config = require('./.config');
+const config = require('./.config.js');
 const TOKEN = config.token;
 const axios = require('axios').default;
 const _ = require('underscore');
@@ -13,7 +13,7 @@ const compression = require('compression');
 
 
 const app = express();
-const port = 3000;
+const port = 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression());
@@ -44,7 +44,8 @@ const s3 = new AWS.S3({
 
 // router for handling valid products url string
 app.get('/detailState/*', async (req, res) => {
-  let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  // let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  let base = 'http://localhost:3009';
   console.log(req.url, req.params);
   base += `/${req.params['0']}`;
 
@@ -52,16 +53,16 @@ app.get('/detailState/*', async (req, res) => {
   let productId = req.params['0'].slice(indexOfProductId + 1);
 
   console.log('PRODID', req.body);
-  let optionsReviews = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}&count=100`,
-    headers: { Authorization: TOKEN },
-  };
-  let optionsReviewsMeta = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${productId}`,
-    headers: { Authorization: TOKEN },
-  };
+  // let optionsReviews = {
+  //   method: 'GET',
+  //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}&count=100`,
+  //   headers: { Authorization: TOKEN },
+  // };
+  // let optionsReviewsMeta = {
+  //   method: 'GET',
+  //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${productId}`,
+  //   headers: { Authorization: TOKEN },
+  // };
 
   let optionsDetail = {
     method: req.method,
@@ -77,27 +78,30 @@ app.get('/detailState/*', async (req, res) => {
   };
   const detailRequest = axios(optionsDetail);
   const styleRequest = axios(optionsStyle);
-  const reviewsRequest = axios(optionsReviews);
-  const reviewsRequestMeta = axios(optionsReviewsMeta);
+  // const reviewsRequest = axios(optionsReviews);
+  // const reviewsRequestMeta = axios(optionsReviewsMeta);
 
   try {
     let result = await detailRequest;
     let result2 = await styleRequest;
-    let result3 = await reviewsRequest;
-    let result4 = await reviewsRequestMeta;
+    // let result3 = await reviewsRequest;
+    // let result4 = await reviewsRequestMeta;
     let detail = result.data;
     let style = result2.data;
-    let reviews = result3.data;
-    let meta = result4.data;
+    // let reviews = result3.data;
+    // let meta = result4.data;
 
-    res.send([detail, style, reviews, meta]);
+    // res.send([detail, style, reviews, meta]);
+    res.send([detail, style]);
+    // res.send([detail], []);
   } catch (err) {
     res.send(err);
   }
 });
 // Router handler for processing api endpoints
 app.all('/api/*', (req, res) => {
-  let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  // let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  let base = 'http://localhost:3009';
   let method = req.method;
   let url = req.url.substring(4);
   let query = req.query;
