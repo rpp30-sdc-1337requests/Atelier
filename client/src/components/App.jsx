@@ -91,52 +91,55 @@ class App extends React.Component {
     console.log('Product ID is: ', productId);
     if (!truth) {
       console.log('GET New Product info and styles');
-      axios
-        .get(`/detailState/products/${productId}`)
+      axios.get(`/detailState/products/${productId}`)
         .then((results) => {
           console.log('results', results.data);
-          let styles = results.data[1].results;
 
-          if (!styles.length) {
+          if (results.data[1].length === 0) {
             console.log('no length to this style ');
+            let styles = [];
+          } else {
+            let styles = results.data[1].results;
           }
+
 
           // const starRatingObj = results.data[3].ratings;
-          const starRatingObj = this.productAverageRating(
-            results.data[2].results
-          );
+          // const starRatingObj = this.productAverageRating(
+          //   results.data[2].results
+          // );
           let starRating = 0;
-          let vals = 0;
-          let starRatingGenerator = [
-            EmptyStar,
-            EmptyStar,
-            EmptyStar,
-            EmptyStar,
-            EmptyStar,
-          ];
-          vals = Object.values(starRatingObj);
-          if (vals.length > 0) {
-            vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
-            for (let key in starRatingObj) {
-              starRating += Number(key) * Number(starRatingObj[key]);
-            }
-            starRatingGenerator = this.starRatingRender(starRating / vals);
-            starRating = Math.round((starRating / vals) * 10) / 10;
-          } else {
-            starRating = 0;
-          }
+          // let vals = 0;
+          // let starRatingGenerator = [
+          //   EmptyStar,
+          //   EmptyStar,
+          //   EmptyStar,
+          //   EmptyStar,
+          //   EmptyStar,
+          // ];
+          // vals = Object.values(starRatingObj);
+          // if (vals.length > 0) {
+          //   vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
+          //   for (let key in starRatingObj) {
+          //     starRating += Number(key) * Number(starRatingObj[key]);
+          //   }
+          //   starRatingGenerator = this.starRatingRender(starRating / vals);
+          //   starRating = Math.round((starRating / vals) * 10) / 10;
+          // } else {
+          //   starRating = 0;
+          // }
 
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
-            productId: results.data[0].id,
+            productId: results.data[0].product_id,
             displayStyles: results.data[1].results,
             productName: results.data[0].name,
-            reviews: results.data[2],
-            ratings: results.data[3],
+            // reviews: results.data[2],
+            // ratings: results.data[3],
             productRating: starRating,
             // productRatingStars: starRatingGenerator,
-            productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
+            // productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
+            productRatingStars: this.starRatingRender(this.state.productRating, true),
             nightShift: saveNightMode
           });
           // console.log('MAINSTATE AFTER CALL', this.state);
@@ -271,7 +274,7 @@ class App extends React.Component {
             <OutfitProducts
               validProduct={this.state.displayStyles}
             /> */}
-
+{/*
             <QuestionsNAnswersContainer
               formatBody={this.formatBody}
               productId={this.state.productId}
@@ -291,7 +294,7 @@ class App extends React.Component {
               productName={this.state.productName}
               productAverageRating={this.productAverageRating}
               nightShift={this.state.nightShift}
-            />
+            /> */}
           </div>
         </React.Fragment>
       );
