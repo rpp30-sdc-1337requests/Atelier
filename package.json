@@ -29,6 +29,7 @@
     "test": "jest --coverage",
     "client-dev": "webpack --mode development --watch",
     "server-dev": "npx nodemon server.js",
+    "fec-server-inspect": "node --inspect server.js",
     "client-dep": "webpack --mode development ",
     "client-prod": "webpack --mode=production"
   },
