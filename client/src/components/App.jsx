@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import TOKEN from '../../../.config.js';
 import React from 'react';
 import axios from 'axios';
 import './App.css';
@@ -26,7 +27,7 @@ class App extends React.Component {
     // this.idd = 47425
     super(props);
     this.state = {
-      productId: 47425,
+      productId: 2,
       displayProduct: DefaultState.displayProduct,
       displayStyles: DefaultState.diplayStyles,
       reviews: DefaultState.reviews,
@@ -51,7 +52,7 @@ class App extends React.Component {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp${apiRoute}`,
       data: data,
       params: params,
-      headers: { Authorization: '' },
+      headers: { Authorization: TOKEN },
     };
 
     return bodyObj;

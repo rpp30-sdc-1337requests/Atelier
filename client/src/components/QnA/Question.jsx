@@ -32,6 +32,7 @@ class Question extends React.Component {
     };
     const body = formatBody(null, null, params);
     const allAnswers = [];
+    // axios.get(`localhost:8080/api/qa/questions/${questionId}/answers`, {params: {question_id}})
     axios.get(`/api/qa/questions/${questionId}/answers`, body)
       .then((answerList) => {
         const ansList = answerList.data.results;

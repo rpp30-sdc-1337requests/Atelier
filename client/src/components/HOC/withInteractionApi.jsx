@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import TOKEN from '../../../../.config.js';
 
 var withInteractionsApi = function (WrappedComponent, widget) {
 
@@ -16,7 +17,7 @@ var withInteractionsApi = function (WrappedComponent, widget) {
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp${apiRoute}`,
         data: data,
         params: params,
-        headers: { Authorization: '' },
+        headers: { Authorization: TOKEN },
       };
 
       return bodyObj;
