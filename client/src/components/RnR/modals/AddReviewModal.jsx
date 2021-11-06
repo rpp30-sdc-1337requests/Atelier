@@ -67,10 +67,11 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewHandler(e) {
+
+    event.preventDefault();
     if (!this.state.starClick || this.state.starClick === 'no') {
       // alert('please choose a star rating');
       this.setState({ starClick: 'no' });
-      event.preventDefault();
       return;
     } else {
       let S = this.state;
@@ -88,6 +89,7 @@ class AddReviewModal extends React.Component {
       };
 
       let postReview = this.props.formatBody(null, null, null, params);
+      console.log('Posting review');
       axios.post('/api/reviews', postReview.data)
         .then((results) => {
           console.log('Successful POST of Review'); event.preventDefault();
