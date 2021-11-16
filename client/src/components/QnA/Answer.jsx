@@ -28,16 +28,14 @@ class Answer extends React.Component {
       // call the answer helpfulness api endpoint
       const {formatBody} = this.props;
       const {answer_id: answerId} = this.props.answer;
-      axios.put(`/api/qa/answers/${answerId}/helpful`)
+      axios.put(`http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/answers/${answer_id}/helpful`)
         .then((results) => {
           console.log('Successful');
         })
         .catch((err) => {
           console.log('Error while updating the answer helpfulness');
         });
-
     }
-
   }
 
   showImageModal(photoURL) {
@@ -60,7 +58,7 @@ class Answer extends React.Component {
     // call api endpoint to report the answer
     const {formatBody} = this.props;
     const {answer_id: answerId} = this.props.answer;
-    axios.put(`/api/qa/answers/${answerId}/report`)
+    axios.put(`http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/answers/${answerId}/report`)
       .then((results) => {
         console.log('Successfully Reported the answer');
       })

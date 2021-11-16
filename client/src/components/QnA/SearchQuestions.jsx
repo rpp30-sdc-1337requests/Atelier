@@ -28,7 +28,7 @@ class SearchQuestions extends React.Component {
     };
     const body = formatBody(null, null, params);
 
-    axios.get('/api/qa/questions', body)
+    axios.get('http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/questions', {params: {product_id: this.props.productId}})
       .then((results) => {
         this.setState((state) => {
           const sortedData = results.data.results.sort((a, b) => {
@@ -82,8 +82,8 @@ class SearchQuestions extends React.Component {
       product_id: this.props.productId
     };
 
-    const body = this.props.formatBody(null, null, null, data);
-    axios.post('/api/qa/questions', body.data)
+    // const body = this.props.formatBody(null, null, null, data);
+    axios.post('http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/questions', { data })
       .then((result) => {
         console.log('Successfully posted a new question', result.data);
       })

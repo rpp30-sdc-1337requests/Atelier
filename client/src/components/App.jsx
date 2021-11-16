@@ -26,7 +26,7 @@ class App extends React.Component {
     // this.idd = 47425
     super(props);
     this.state = {
-      productId: 47425,
+      productId: 2,
       displayProduct: DefaultState.displayProduct,
       displayStyles: DefaultState.diplayStyles,
       reviews: DefaultState.reviews,

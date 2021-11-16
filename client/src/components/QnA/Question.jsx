@@ -32,7 +32,7 @@ class Question extends React.Component {
     };
     const body = formatBody(null, null, params);
     const allAnswers = [];
-    axios.get(`/api/qa/questions/${questionId}/answers`, body)
+    axios.get(`http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/questions/${questionId}/answers`, {params: {page: 1, count: 5}})
       .then((answerList) => {
         const ansList = answerList.data.results;
         const sellerAnswers = ansList.filter((ans) => {
@@ -100,7 +100,7 @@ class Question extends React.Component {
     const {formatBody} = this.props;
     const {question_id: questionId} = this.props.question;
     const body = formatBody(null, null, null, data);
-    axios.post(`/api/qa/questions/${questionId}/answers`, body.data)
+    axios.post(`http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/questions/${questionId}/answers`, body.data)
       .then((result) => {
         console.log('Successfully posted a new answer', result.data);
       })
@@ -123,7 +123,7 @@ class Question extends React.Component {
       // call the api to mark it as helpful
       const {formatBody} = this.props;
       const {question_id: questionId} = this.props.question;
-      axios.put(`/api/qa/questions/${questionId}/helpful`)
+      axios.put(`http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/questions/${questionId}/helpful`)
         .then((result) => {
           console.log('Successful:');
         })
