@@ -267,14 +267,14 @@ class App extends React.Component {
               grabNightShift={this.grabNightShift}
             />
 
-            {/* <RelatedProducts
+            <RelatedProducts
               relatedProd={this.state.displayProduct}
               validProduct={this.state.displayStyles}
             />
             <OutfitProducts
               validProduct={this.state.displayStyles}
-            /> */}
-{/*
+            />
+
             <QuestionsNAnswersContainer
               formatBody={this.formatBody}
               productId={this.state.productId}
@@ -294,7 +294,7 @@ class App extends React.Component {
               productName={this.state.productName}
               productAverageRating={this.productAverageRating}
               nightShift={this.state.nightShift}
-            /> */}
+            />
           </div>
         </React.Fragment>
       );
