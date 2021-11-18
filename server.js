@@ -46,7 +46,7 @@ const s3 = new AWS.S3({
 app.get('/detailState/*', async (req, res) => {
   // let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
   // let base = 'http://localhost:3009';
-  let base = 'http://ec2-34-228-13-146.compute-1.amazonaws.com:80';
+  let base = 'http://ec2-3-85-51-45.compute-1.amazonaws.com:80';
   console.log(req.url, req.params);
   base += `/${req.params['0']}`;
 
