@@ -18,6 +18,7 @@ class ProductInformation extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
       productId: this.props.productId,
       productStyles: this.props.sortedStyles,
@@ -41,6 +42,8 @@ class ProductInformation extends React.Component {
       expanded: false,
       zoomed: false,
     };
+
+
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
     this.sizeAndQuantityClickHandler =

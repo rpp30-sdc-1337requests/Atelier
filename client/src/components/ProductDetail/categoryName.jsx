@@ -5,7 +5,7 @@ let CategoryName = function (props) {
     <Fragment>
       {props.productInfo.map((productData) => {
         return (
-          <div key={productData.id}>
+          <div key={productData.product_id}>
             <div className='product-category'>
               Category:{productData.category}
             </div>
