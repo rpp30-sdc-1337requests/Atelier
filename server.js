@@ -93,10 +93,10 @@ app.get('/detailState/*', async (req, res) => {
     let meta = result4.data;
 
     res.send([detail, style, reviews, meta]);
-    res.send([detail, style]);
-    res.send([detail], []);
+    // res.send([detail, style]);
+    // res.send([detail], []);
   } catch (err) {
-    res.send(err);
+    res.end(err);
   }
 });
 // Router handler for processing api endpoints

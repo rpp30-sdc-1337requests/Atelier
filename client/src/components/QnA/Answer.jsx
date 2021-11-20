@@ -28,7 +28,8 @@ class Answer extends React.Component {
       // call the answer helpfulness api endpoint
       const {formatBody} = this.props;
       const {answer_id: answerId} = this.props.answer;
-      axios.put(`http://ec2-54-205-190-100.compute-1.amazonaws.com:8080/qa/answers/${answer_id}/helpful`)
+      console.log('answer_id', answerId);
+      axios.put(`http://ec2-34-204-68-14.compute-1.amazonaws.com:8080/qa/answers/${answerId}/helpful`)
         .then((results) => {
           console.log('Successful');
         })
