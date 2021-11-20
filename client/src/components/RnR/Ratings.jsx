@@ -42,10 +42,10 @@ class Ratings extends React.Component {
 
     let {productStars} = this.props;
 
-    let totalRecommends = this.props.reviewsMeta.recommended.true;
+    let totalRecommends = this.props.reviewsMeta.recommend[true];
     let percentReviewsRecommend = Math.round(totalRecommends / reviewsCount * 100);
     if (percentReviewsRecommend > 99) { percentReviewsRecommend = 100; }
-
+    console.log('props rating: ', this.props.productRating);
     let productRating = this.props.productRating;
     if (productRating === 1) { productRating = '1.0'; }
     if (productRating === 2) { productRating = '2.0'; }

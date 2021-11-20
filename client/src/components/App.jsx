@@ -57,26 +57,6 @@ class App extends React.Component {
     return bodyObj;
   }
 
-  // componentDidMount() {
-  //   let totalReviewCount = DefaultState.reviews.count;
-  //   const starRatingObj = DefaultState.reviewsMeta.ratings;
-  //   let starRating = 0; let vals = 0;
-  //   if (starRatingObj) {
-  //     vals = Object.values(starRatingObj);
-  //     vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
-  //     for (let key in starRatingObj) {
-  //       starRating += Number(key) * Number(starRatingObj[key]);
-  //     }
-  //   }
-  //   const starRatingGenerator = this.starRatingRender(starRating / vals);
-  //   starRating = Math.round(starRating / vals * 10) / 10;
-
-  //   this.setState({
-  //     productRating: starRating,
-  //     productRatingStars: starRatingGenerator
-  //   });
-  // }
-
   componentDidMount() {
     let saveNightMode = this.state.nightShift;
 
@@ -103,30 +83,32 @@ class App extends React.Component {
           }
 
 
-          // const starRatingObj = results.data[3].ratings;
+          const starRatingObj = results.data[3].ratings;
           // const starRatingObj = this.productAverageRating(
           //   results.data[2].results
           // );
           let starRating = 0;
-          // let vals = 0;
-          // let starRatingGenerator = [
-          //   EmptyStar,
-          //   EmptyStar,
-          //   EmptyStar,
-          //   EmptyStar,
-          //   EmptyStar,
-          // ];
-          // vals = Object.values(starRatingObj);
-          // if (vals.length > 0) {
-          //   vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
-          //   for (let key in starRatingObj) {
-          //     starRating += Number(key) * Number(starRatingObj[key]);
-          //   }
-          //   starRatingGenerator = this.starRatingRender(starRating / vals);
-          //   starRating = Math.round((starRating / vals) * 10) / 10;
-          // } else {
-          //   starRating = 0;
-          // }
+          let vals = 0;
+          let starRatingGenerator = [
+            EmptyStar,
+            EmptyStar,
+            EmptyStar,
+            EmptyStar,
+            EmptyStar,
+          ];
+          vals = Object.values(starRatingObj);
+          if (vals.length > 0) {
+            vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
+            for (let key in starRatingObj) {
+              starRating += Number(key) * Number(starRatingObj[key]);
+            }
+            starRatingGenerator = this.starRatingRender(starRating / vals);
+            starRating = Math.round((starRating / vals) * 10) / 10;
+          } else {
+            starRating = 0;
+          }
+
+          console.log(`StarRating: ${starRating}\nGenerated: ${starRatingGenerator}`);
 
           this.setState({
             displayProduct: results.data[0],
@@ -134,11 +116,11 @@ class App extends React.Component {
             productId: results.data[0].product_id,
             displayStyles: results.data[1].results,
             productName: results.data[0].name,
-            // reviews: results.data[2],
-            // ratings: results.data[3],
+            reviews: results.data[2],
+            ratings: results.data[3],
             productRating: starRating,
-            // productRatingStars: starRatingGenerator,
-            // productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
+            productRatingStars: starRatingGenerator,
+            productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
             productRatingStars: this.starRatingRender(this.state.productRating, true),
             nightShift: saveNightMode
           });
